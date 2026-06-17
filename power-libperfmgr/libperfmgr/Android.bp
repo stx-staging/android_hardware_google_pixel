@@ -50,47 +50,29 @@ cc_defaults {
     ],
 }
 
-cc_library {
+cc_prebuilt_library {
     name: "libperfmgr",
-    vendor_available: true,
-    defaults: ["libperfmgr_defaults"],
-    export_include_dirs: ["include"],
-    srcs: [
-        "RequestGroup.cc",
-        "Node.cc",
-        "FileNode.cc",
-        "PropertyNode.cc",
-        "NodeLooperThread.cc",
-        "HintManager.cc",
-        "AdpfConfig.cc",
-        "EventNode.cc",
-        "JobQueueManager.cc",
-        "FlagProvider.cc",
-    ],
-}
-
-cc_test {
-    name: "libperfmgr_test",
-    defaults: ["libperfmgr_defaults"],
-    static_libs: [
-        "libperfmgr",
-        "libgmock",
-    ],
-    srcs: [
-        "tests/RequestGroupTest.cc",
-        "tests/FileNodeTest.cc",
-        "tests/PropertyNodeTest.cc",
-        "tests/NodeLooperThreadTest.cc",
-        "tests/HintManagerTest.cc",
-        "tests/EventNodeTest.cc",
-        "tests/JobQueueManagerTest.cc",
-        "tests/FlagProviderTest.cc",
-    ],
-    test_suites: [
-        "device-tests",
-        "device-pixel-tests",
-    ],
-    require_root: true,
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "libperfmgr.so",
+            ],
+            shared_libs: [
+                "libbase",
+                "libcutils",
+                "libprocessgroup",
+                "libutils",
+                "liblog",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
 }
 
 cc_binary {
