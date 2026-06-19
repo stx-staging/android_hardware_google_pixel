@@ -66,6 +66,7 @@ cc_library_headers {
 
 cc_prebuilt_binary {
     name: "android.hardware.power-service.pixel-libperfmgr",
+    defaults: ["android.hardware.power-ndk_shared"],
     owner: "google",
     target: {
         android_arm64: {
@@ -83,7 +84,8 @@ cc_prebuilt_binary {
                 "libdisppower-pixel",
                 "libperfmgr",
                 "libprocessgroup",
-                "pixel-power-ext-V1-ndk",
+                "libprotobuf-cpp-lite",
+                "pixel-power-ext-V2-ndk",
                 "android.frameworks.stats-V2-ndk",
                 "android.hardware.common.fmq-V1-ndk",
                 "libfmq",

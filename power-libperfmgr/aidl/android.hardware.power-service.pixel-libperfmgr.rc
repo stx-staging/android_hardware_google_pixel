@@ -34,3 +34,5 @@ on property:ro.debuggable=1 && property:vendor.powerhal.config.debug=*
 on property:persist.vendor.powerhal.config.debug=*
     setprop vendor.powerhal.config.debug ${persist.vendor.powerhal.config.debug}
 
+on late-fs-data
+    mkdir /data/vendor/powerhal 0700 root system
